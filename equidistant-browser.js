@@ -1,6 +1,6 @@
-var assert = require('assert'),
-    btoa = require('btoa'),
-    atob = require('atob');
+//var assert = require('assert'),
+//    btoa = require('btoa'),
+//    atob = require('atob');
   
 /********************************************************************************
  * Write a function which, 
@@ -152,6 +152,8 @@ function sort(array) {
   };
 
   var reducer = function(state, pairedNumber) {
+    console.log('current paired number: ' + pairedNumber);
+    console.log(state);
 
     var buffer = state.buffer,
         startingIndex = state.hasOwnProperty("startingIndex") ?
@@ -160,6 +162,8 @@ function sort(array) {
         recursionCounter = state.recursionCounter + 1,
         recursionLimit = state.recursionLimit,
         output;
+
+    console.log('current buffer: ' + buffer);
 
     if (recursionCounter > recursionLimit) {
       return -1;
@@ -276,6 +280,7 @@ function parseArrayOfObfuscatedNumbers(array) {
 ********************************************************************************/
 // just making sure obfuscation works (obviously this is very much based
 // on the "honor" system
+/*
 assert.equal('YQ==', obfuscateNumber(10));
 assert.equal(10, parseObfuscatedNumber('YQ=='));
 
@@ -285,7 +290,19 @@ assert.equal(-1, sort([1, 1, 2, 2, 3, 3, 4]));
 
 // hard to assert your function is correct without giving away
 // the answer to Darren's riddle
-assert.equal(true, arraysEqual(parseArrayOfObfuscatedNumbers(['NA==', 'MQ==', 'Mw==', 'MQ==', 'Mg==', 'NA==', 'Mw==', 'Mg==']),
+assert.equal(parseArrayOfObfuscatedNumbers(['NA==', 'MQ==', 'Mw==', 'MQ==', 'Mg==', 'NA==', 'Mw==', 'Mg==']),
+  sort([1, 1, 2, 2, 3, 3, 4, 4]));
+*/
+console.assert('YQ==' == obfuscateNumber(10));
+console.assert(10 == parseObfuscatedNumber('YQ=='));
+
+// real tests
+console.assert(-1 == sort('fish'));
+console.assert(-1 == sort([1, 1, 2, 2, 3, 3, 4]));
+
+// hard to assert your function is correct without giving away
+// the answer to Darren's riddle
+console.assert(arraysEqual(parseArrayOfObfuscatedNumbers(['NA==', 'MQ==', 'Mw==', 'MQ==', 'Mg==', 'NA==', 'Mw==', 'Mg==']),
   sort([1, 1, 2, 2, 3, 3, 4, 4])));
 
 
