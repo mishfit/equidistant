@@ -1,0 +1,14 @@
+{
+  "name":"equidistant",
+  "version":"0.0.0",
+  "description": "a javascript version of Darren's riddle",
+  "repository":{
+    "type": "git",
+    "url": ""
+  },
+  "dependencies": {
+    "btoa":"*",
+    "atob":"*"
+  },
+  "license": "MIT"
+}
