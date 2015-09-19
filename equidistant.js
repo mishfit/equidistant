@@ -107,7 +107,7 @@ function sort(array) {
     if (Array.isArray(buffer)) {
       var output = buffer.slice();
       for (var i = 0; i < output.length; i++) {
-        if (output[i] === null) {
+        if (output[0] === null) {
           output.push(output.shift()); // push onto tail whatever is taken from head
         } else {
           break;
@@ -176,7 +176,7 @@ function sort(array) {
         buffer: buffer,
         recursionCounter: recursionCounter,
         recursionLimit: recursionLimit,
-        startingIndex: startingIndex + 1
+        startingIndex: startingIndex
       },
       pairedNumber);
     }
@@ -211,13 +211,16 @@ function sort(array) {
   var initialValue = {
     buffer: arrayGenerator(pairedNumbers.length * 3),
     recursionCounter: 0,
-    recursionLimit: 100
+    recursionLimit: 200
   };
 
-  var result = pairedNumbers.reduce(reducer,
+  var reduction = pairedNumbers.reduce(reducer,
     initialValue);
 
-  return result.buffer.slice(0, pairedNumbers.length * 2);
+  var output = reduction.buffer.slice(0, pairedNumbers.length * 2);
+  console.log('sorted "' + array + '" to  "' + output + '"');
+
+  return output;
 };
 /********************************************************************************
  * ARRAY COMPARER - used by 'assert' to check resulting arrays
@@ -285,8 +288,8 @@ assert.equal(-1, sort([1, 1, 2, 2, 3, 3, 4]));
 
 // hard to assert your function is correct without giving away
 // the answer to Darren's riddle
-assert.equal(true, arraysEqual(parseArrayOfObfuscatedNumbers(['NA==', 'MQ==', 'Mw==', 'MQ==', 'Mg==', 'NA==', 'Mw==', 'Mg==']),
-  sort([1, 1, 2, 2, 3, 3, 4, 4])));
+assert.equal(true, arraysEqual(parseArrayOfObfuscatedNumbers(['NA==', 'MQ==', 'Mw==', 'MQ==', 'Mg==', 'NA==', 'Mw==', 'Mg==']), sort([1, 1, 2, 2, 3, 3, 4, 4])));
 
+assert.equal(true, arraysEqual([2, 3, 1, 2, 1, 3], sort([1, 1, 2, 2, 3, 3])));
 
 console.log('succeeded!');
