@@ -1,7 +1,3 @@
-var assert = require('assert'),
-    btoa = require('btoa'),
-    atob = require('atob');
-  
 /********************************************************************************
  * Write a function which, 
  * 1. takes in an array of integers
@@ -75,19 +71,17 @@ function parseArrayOfObfuscatedNumbers(array) {
 /********************************************************************************
  * TESTS
 ********************************************************************************/
-// just making sure obfuscation works (obviously this is very much based
-// on the "honor" system
-assert.equal('YQ==', obfuscateNumber(10));
-assert.equal(10, parseObfuscatedNumber('YQ=='));
+console.assert('YQ==' == obfuscateNumber(10));
+console.assert(10 == parseObfuscatedNumber('YQ=='));
 
 // real tests
-assert.equal(-1, sort('fish'));
-assert.equal(-1, sort([1, 1, 2, 2, 3, 3, 4]));
+console.assert(-1 == sort('fish'));
+console.assert(-1 == sort([1, 1, 2, 2, 3, 3, 4]));
 
 // hard to assert your function is correct without giving away
 // the answer to Darren's riddle
-assert.equal(true, arraysEqual(parseArrayOfObfuscatedNumbers(['NA==', 'MQ==', 'Mw==', 'MQ==', 'Mg==', 'NA==', 'Mw==', 'Mg==']), sort([1, 1, 2, 2, 3, 3, 4, 4])));
+console.assert(arraysEqual(parseArrayOfObfuscatedNumbers(['NA==', 'MQ==', 'Mw==', 'MQ==', 'Mg==', 'NA==', 'Mw==', 'Mg==']), sort([1, 1, 2, 2, 3, 3, 4, 4])));
 
-assert.equal(true, arraysEqual([2, 3, 1, 2, 1, 3], sort([1, 1, 2, 2, 3, 3])));
+console.assert(arraysEqual([2, 3, 1, 2, 1, 3], sort([1, 1, 2, 2, 3, 3])));
 
 console.log('succeeded!');
